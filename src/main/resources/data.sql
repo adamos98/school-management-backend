@@ -1,0 +1,15 @@
+insert into school_subject (name) values ('Biology');
+insert into school_subject (name) values ('Maths');
+insert into school_subject (name) values ('Computer Science');
+insert into school_group (sign, year) values ('A', '2002');
+insert into school_group (sign, year) values ('B', '2002');
+insert into student (email,password,fname,lname,school_group_id) values ('1@o2.pl', '123', 'Adam', 'Pozdra', 1);
+insert into student (email,password,fname,lname,school_group_id) values ('2@o2.pl', '123', 'La', 'Coca', 1);
+insert into student (email,password,fname,lname,school_group_id) values ('3@o2.pl', '123', 'Nostra', 'Labela', 2);
+insert into student (email,password,fname,lname,school_group_id) values ('4@o2.pl', '123', 'Edward', 'Kenway', 2);
+insert into teacher (email,password,fname,lname) values ('teacher1@o2.pl', '123', 'Barba', 'Dziad');
+insert into teacher (email,password,fname,lname) values ('teacher2@o2.pl', '123', 'Eluwia', 'Friz');
+insert into grade (mark,annotation,school_subject_id,teacher_id,student_id) values ('5','Exam',1,1,2);
+insert into grade (mark,annotation,school_subject_id,teacher_id,student_id) values ('2','Work on lesson',2,2,1);
+insert into grade (mark,school_subject_id,teacher_id,student_id) values ('6',3,1,3);
+insert into grade (mark,annotation,school_subject_id,teacher_id,student_id) values ('3','Just mark',2,2,1);
