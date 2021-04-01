@@ -23,7 +23,7 @@ public class SchoolSubjectService {
     public SchoolSubject getSchoolSubjectById(long id){
         return schoolSubjectRepository.findSchoolSubjectById(id);
     }
-
+    //test
     public SchoolSubject addSchoolSubject(SchoolSubject schoolSubject){
         return schoolSubjectRepository.save(schoolSubject);
     }
