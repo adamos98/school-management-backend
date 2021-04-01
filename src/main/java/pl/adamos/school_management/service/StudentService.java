@@ -1,6 +1,8 @@
 package pl.adamos.school_management.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import pl.adamos.school_management.model.Student;
 import pl.adamos.school_management.repository.StudentRepository;
@@ -14,6 +16,7 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
 
+    @Cacheable(cacheNames = "Students")
     public List<Student> getStudents(){
         return studentRepository.findAll();
     }
@@ -22,6 +25,7 @@ public class StudentService {
         return studentRepository.findStudentBySchoolGroupSign(sign);
     }
 
+    @Cacheable(cacheNames = "StudentById", key = "#id")
     public Student getStudentById(long id){
         return studentRepository.findStudentById(id);
     }
@@ -32,6 +36,7 @@ public class StudentService {
     }
 
     @Transactional
+    @CachePut(cacheNames = "StudentById", key = "#result.id")
     public Student updateStudent(Student student){
         Student studentEdited = studentRepository.findStudentById(student.getId());
         studentEdited.setEmail(student.getEmail());

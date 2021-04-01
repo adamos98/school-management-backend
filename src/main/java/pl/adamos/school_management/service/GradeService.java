@@ -2,6 +2,8 @@ package pl.adamos.school_management.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import pl.adamos.school_management.model.Grade;
 import pl.adamos.school_management.repository.GradesRepository;
@@ -15,10 +17,12 @@ public class GradeService {
 
     private final GradesRepository gradesRepository;
 
+    @Cacheable(cacheNames = "Grades")
     public List<Grade> getGrades() {
         return gradesRepository.findAllGrades();
     }
 
+    @Cacheable(cacheNames = "GradeById", key = "#id")
     public Grade getGradeById(long id) {
         return gradesRepository.findById(id);
     }
@@ -36,6 +40,7 @@ public class GradeService {
     }
 
     @Transactional
+    @CachePut(cacheNames = "GradeById", key = "#result.id")
     public Grade updateGrade(Grade grades){
         Grade gradeEdited = gradesRepository.findById(grades.getId());
         gradeEdited.setMark(grades.getMark());

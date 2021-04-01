@@ -1,6 +1,7 @@
 package pl.adamos.school_management.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import pl.adamos.school_management.model.SchoolGroup;
 import pl.adamos.school_management.repository.SchoolGroupRepository;
@@ -13,10 +14,11 @@ public class SchoolGroupService {
 
     private final SchoolGroupRepository schoolGroupRepository;
 
+    @Cacheable(cacheNames = "SchoolGroups")
     public List<SchoolGroup> getSchoolGroups(){
         return schoolGroupRepository.findAll();
     }
-
+    @Cacheable(cacheNames = "SchoolGroupById")
     public SchoolGroup getSchoolGroupById(long id){
         return schoolGroupRepository.findSchoolGroupById(id);
     }
